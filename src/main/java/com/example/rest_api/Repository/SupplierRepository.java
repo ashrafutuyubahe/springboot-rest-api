@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.example.rest_api.Models.Supplier;
 
+
 public interface SupplierRepository extends JpaRepository<Supplier, Long> {
 
  
@@ -18,4 +19,7 @@ public interface SupplierRepository extends JpaRepository<Supplier, Long> {
   
     @Query("SELECT s FROM Supplier s WHERE s.supplierName = :supplierName")
     List<Supplier> findBySupplierName(@Param("supplierName") String supplierName);
+
+
+
 }

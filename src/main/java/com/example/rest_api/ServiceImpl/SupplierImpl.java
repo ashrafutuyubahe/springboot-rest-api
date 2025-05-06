@@ -4,8 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import com.example.rest_api.Models.Supplier;
 import com.example.rest_api.Repository.SupplierRepository;
 
@@ -61,6 +64,10 @@ public class SupplierImpl {
     public List<Supplier> searchBySupplierName(String name) {
         return userRepository.findBySupplierName(name);
     }
+
+    public Page<Supplier> getAllSuppliersPaginated(Pageable pageable) {
+    return userRepository.findAll(pageable);
+}
 
 
 }

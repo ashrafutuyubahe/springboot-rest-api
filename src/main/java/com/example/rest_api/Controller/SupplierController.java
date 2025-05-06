@@ -3,11 +3,16 @@ package com.example.rest_api.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.rest_api.Models.Supplier;
 import com.example.rest_api.ServiceImpl.SupplierImpl;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
 
 @RestController
 @RequestMapping("/api/v1/suppliers")
@@ -21,7 +26,7 @@ public class SupplierController {
         return ResponseEntity.ok(supplierService.createSupplier(supplier));
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<Supplier>> getAll() {
         return ResponseEntity.ok(supplierService.getAllSuppliers());
     }
@@ -64,7 +69,16 @@ public class SupplierController {
     
 
     
+    @GetMapping("/paginated")
+public ResponseEntity<Page<Supplier>> getAllPaginated(
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "5") int size) {
     
+    Pageable pageable = PageRequest.of(page, size);
+    Page<Supplier> pagedSuppliers = supplierService.getAllSuppliersPaginated(pageable);
+    return ResponseEntity.ok(pagedSuppliers);
+}
 
-    
+//implement sorting using name 
+
 }
