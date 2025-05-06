@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -68,6 +69,15 @@ public class SupplierImpl {
     public Page<Supplier> getAllSuppliersPaginated(Pageable pageable) {
     return userRepository.findAll(pageable);
 }
+
+public List<Supplier> getAllSuppliersSortedByName(String sortDir) {
+    Sort sort = sortDir.equalsIgnoreCase("desc") ?
+                Sort.by("supplierName").descending() :
+                Sort.by("supplierName").ascending();
+
+    return userRepository.findAll(sort);
+}
+
 
 
 }

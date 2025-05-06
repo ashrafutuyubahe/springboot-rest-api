@@ -79,6 +79,13 @@ public ResponseEntity<Page<Supplier>> getAllPaginated(
     return ResponseEntity.ok(pagedSuppliers);
 }
 
-//implement sorting using name 
+@GetMapping("/sorted-by-name")
+public ResponseEntity<List<Supplier>> getAllSortedByName(
+        @RequestParam(defaultValue = "asc") String sortDir) {
+
+    List<Supplier> sortedSuppliers = supplierService.getAllSuppliersSortedByName(sortDir);
+    return ResponseEntity.ok(sortedSuppliers);
+}
+
 
 }
