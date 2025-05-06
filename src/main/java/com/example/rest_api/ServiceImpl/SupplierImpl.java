@@ -44,8 +44,23 @@ public class SupplierImpl {
         }
     }
 
+
+   public  Supplier searchByAddres(String addr){
+    //  Supplier supplierFound= userRepository.findBySupplierAddress(addr);
+    // return  supplierFound;
+    return userRepository.findByAddres(addr).orElse(null);
+    
+   }
     
     public void deleteSupplier(Long id) {
         userRepository.deleteById(id);
     }
+
+
+
+    public List<Supplier> searchBySupplierName(String name) {
+        return userRepository.findBySupplierName(name);
+    }
+
+
 }
